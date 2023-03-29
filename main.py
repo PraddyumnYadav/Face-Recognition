@@ -1,4 +1,5 @@
 import cv2
+import sys
 
 # Get user supplied values
 imagePath = sys.argv[1]
@@ -17,5 +18,11 @@ faces = faceCascade.detectMultiScale(
     scaleFactor=1.1,
     minNeighbors=5,
     minSize=(30, 30),
-    flags = cv2.cv.CV_HAAR_SCALE_IMAGE
+    flags = cv2.CASCADE_SCALE_IMAGE
 )
+
+print(f"Found {len(faces)} faces!")
+
+# Draw a rectangle around the faces
+for (x, y, w, h) in faces:
+    cv2.rectangle(image, (x, y), (x+w, y+h), (0, 255, 0), 2)
